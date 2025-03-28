@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pleasant Server 总章程</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+        
+        :root {
+            --pink: #f06292;
+            --blue: #3498db;
+            --yellow: #f4d03f;
+            --light-pink: #ffcdd2;
+            --light-blue: #bbdefb;
+            --light-yellow: #fff9c4;
+            --purple: #9c27b0;
+            --green: #2ecc71;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, var(--light-pink), var(--light-blue), var(--light-yellow));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .floating-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--pink) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, var(--blue) 0%, transparent 20%),
+                radial-gradient(circle at 40% 80%, var(--yellow) 0%, transparent 20%);
+            animation: float 30s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-5%, -5%); }
+            50% { transform: translate(5%, 5%); }
+            75% { transform: translate(5%, -5%); }
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            margin-top: 50px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--pink), var(--blue), var(--yellow), var(--green), var(--purple));
+            animation: rainbow 5s linear infinite;
+            background-size: 400% 100%;
+        }
+        
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        h1 {
+            color: var(--pink);
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 5px rgba(240, 98, 146, 0.5); }
+            50% { text-shadow: 0 0 15px rgba(240, 98, 146, 0.8); }
+            100% { text-shadow: 0 0 5px rgba(240, 98, 146, 0.5); }
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(to right, var(--pink), var(--blue), var(--yellow));
+            border-radius: 2px;
+            animation: linePulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes linePulse {
+            0%, 100% { width: 150px; }
+            50% { width: 200px; }
+        }
+        
+        h2 {
+            color: var(--pink);
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--blue);
+            padding-left: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        h2:hover {
+            transform: translateX(5px);
+            border-left-width: 8px;
+        }
+        
+        h2::before {
+            content: "#";
+            position: absolute;
+            left: -25px;
+            color: var(--blue);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        h2:hover::before {
+            opacity: 1;
+            left: -20px;
+        }
+        
+        h3 {
+            color: var(--blue);
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        h3::before {
+            content: "»";
+            position: absolute;
+            left: 0;
+            color: var(--pink);
+        }
+        
+        .copyright {
+            text-align: right;
+            font-style: italic;
+            color: var(--pink);
+            margin-top: 50px;
+            font-size: 0.9em;
+            position: relative;
+            padding-right: 20px;
+        }
+        
+        .copyright::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 15px;
+            height: 2px;
+            background: var(--pink);
+            transform: translateY(-50%);
+        }
+        
+        ul {
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        li:hover {
+            transform: translateX(5px);
+        }
+        
+        li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--blue);
+            border-radius: 50%;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+        
+        li:hover::before {
+            transform: scale(1);
+            background: var(--pink);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        table:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+        }
+        
+        th {
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: white;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+            position: relative;
+        }
+        
+        th::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink), var(--yellow));
+        }
+        
+        tr:nth-child(even) {
+            background-color: rgba(200, 230, 255, 0.3);
+        }
+        
+        tr:hover {
+            background-color: rgba(255, 235, 150, 0.4);
+            transform: scale(1.01);
+        }
+        
+        .highlight {
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--yellow);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .highlight:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .pink-text {
+            color: var(--pink);
+            transition: all 0.3s ease;
+        }
+        
+        .pink-text:hover {
+            text-shadow: 0 0 5px rgba(240, 98, 146, 0.5);
+        }
+        
+        .blue-text {
+            color: var(--blue);
+            transition: all 0.3s ease;
+        }
+        
+        .blue-text:hover {
+            text-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+        
+        .yellow-text {
+            color: var(--yellow);
+            transition: all 0.3s ease;
+        }
+        
+        .yellow-text:hover {
+            text-shadow: 0 0 5px rgba(244, 208, 63, 0.5);
+        }
+        
+        .code-block {
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 25px 0;
+            border-left: 5px solid var(--blue);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: "代码";
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--blue);
+            color: white;
+            padding: 3px 10px;
+            font-size: 0.8em;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            gap: 20px;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            min-width: 250px;
+            margin: 0;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--pink), var(--blue));
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-card h3 {
+            color: var(--blue);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .contact-card h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--pink);
+        }
+        
+        .contact-card p {
+            margin-bottom: 0;
+            font-size: 1.1em;
+        }
+        
+        code {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            color: var(--purple);
+            transition: all 0.3s ease;
+        }
+        
+        code:hover {
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--pink);
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--pink), var(--blue));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .contact-card {
+                width: 100%;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+        
+        /* 粒子背景 */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            animation: float-particle linear infinite;
+        }
+        
+        @keyframes float-particle {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-bg"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <h1><i class="fas fa-book" style="margin-right: 15px;"></i>Pleasant Server 总章程</h1>
+        
+        <div class="copyright">
+            --mqx2333(QQ:1582187266,隶属于Pleasant Server团队)拥有对本章程的解释权,并且保留所有权利
+        </div>
+        
+        <h2><i class="fas fa-envelope" style="margin-right: 10px;"></i>联系区</h2>
+        <div class="contact-info">
+            <div class="contact-card">
+                <h3><i class="fab fa-qq"></i> QQ群</h3>
+                <p class="highlight">994167576</p>
+                <p class="yellow-text">IP/端口号变动通知群</p>
+            </div>
+            <div class="contact-card">
+                <h3><i class="fas fa-server"></i> 服务器地址</h3>
+                <p class="highlight">9666.fun:32317</p>
+            </div>
+        </div>
+        
+        <h2><i class="fas fa-star" style="margin-right: 10px;"></i>特色区</h2>
+        <ul>
+            <li><span class="blue-text">本服务器有</span> <span class="yellow-text highlight">优秀的反作弊</span>（但是<span class="yellow-text">不免有漏网之鱼</span>（尤其是战斗类作弊），可以使用 <code>/report &lt;举报者&gt; &lt;原因&gt;</code> 举报作弊玩家）</li>
+            <li class="pink-text">反种子泄露</li>
+            <li class="pink-text">反矿物透视</li>
+            <li class="pink-text">反崩服</li>
+            <li class="pink-text">等等等等</li>
+            <li><span class="blue-text">本服务器<span class="highlight">支持</span>刷线机等</span> <span class="yellow-text highlight">基础生电玩法</span></li>
+        </ul>
+        
+        <h2><i class="fas fa-user-shield" style="margin-right: 10px;"></i>权限区</h2>
+        <ul>
+            <li><span class="blue-text">mqx2333在</span> <span class="yellow-text highlight">控制台</span> 和 <span class="yellow-text highlight">mqx2333</span> 账号具有完全的，不可剥夺的，但是不能用作刷物品等恶劣行为的管理员权限（OP/权限节点: <code>*</code> ）</li>
+            <li><span class="blue-text">任何</span> <span class="pink-text highlight">进群7日</span> 的 <span class="pink-text highlight">活跃玩家</span> <span class="blue-text">可以通过阅读 <span class="highlight">如何成为玩家举报处理者</span> 文件后</span>，认为自己 <span class="pink-text highlight">符合规定并能够履行职责</span> ，则可以找我申请，权利如下：</li>
+        </ul>
+        
+        <table>
+            <tr>
+                <th><i class="fas fa-list"></i> 不定时查看有多少举报</th>
+                <th><i class="fas fa-gavel"></i> 处理举报</th>
+                <th><i class="fas fa-check-circle"></i> 回报结果</th>
+                <th><i class="fas fa-gift"></i> 作为此服务器组成成分的奖励</th>
+            </tr>
+            <tr>
+                <td><code>/reportlist</code></td>
+                <td><code>/ban</code></td>
+                <td><code>/handle</code></td>
+                <td class="pink-text highlight">某些特殊时间的奖励发放*2</td>
+            </tr>
+        </table>
+        
+        <h2><i class="fas fa-gamepad" style="margin-right: 10px;"></i>玩法区</h2>
+        <h3 class="blue-text"><i class="fas fa-terminal"></i> 指令玩法</h3>
+        <table>
+            <tr>
+                <th>权限/玩法</th>
+                <th><i class="fas fa-robot"></i> 向DeepSeek提问</th>
+                <th><i class="fas fa-home"></i> 设置家</th>
+                <th><i class="fas fa-map-marker-alt"></i> 传送到家</th>
+                <th><i class="fas fa-trash-alt"></i> 删除创建的家</th>
+                <th><i class="fas fa-undo"></i> 返回到上次死亡地点</th>
+            </tr>
+            <tr>
+                <td class="yellow-text highlight">default(所有人)</td>
+                <td><code>/dp &lt;问题&gt;</code></td>
+                <td><code>/sethome &lt;名称&gt;</code></td>
+                <td><code>/home &lt;名称&gt;</code></td>
+                <td><code>/delhome &lt;名称&gt;</code></td>
+                <td><code>/back</code></td>
+            </tr>
+            <tr>
+                <th><i class="fas fa-shield-alt"></i> 安全返回上次死亡地点 (只支持周围64*64内有安全地点)</th>
+                <th><i class="fas fa-flag"></i> 举报作弊者</th>
+                <th><i class="fas fa-store"></i> 商店(GUI)</th>
+                <th colspan="2"><i class="fas fa-bell-slash"></i> 关闭/开启打怪金币提醒(目前获得提醒有问题，但是每次打怪后的总金币显示没问题)</th>
+            </tr>
+            <tr>
+                <td><code>/backsafeplace</code></td>
+                <td><code>/report &lt;作弊玩家名称&gt; &lt;原因(如 KillAura)&gt;</code></td>
+                <td><code>/shop</code></td>
+                <td colspan="2"><code>/setshowtext</code></td>
+            </tr>
+        </table>
+        
+        <ul>
+            <li><span class="blue-text">领地创建：使用 <span class="highlight">箭(Arrow)</span> 左键点击选第一个点，右键选第二个点，再使用 <code>/dominion create</code> 来创建一个领地，领地最大为 <code>128*64*128</code> ，每人最多10个，你也可以使用 <code>/dominion</code> 指令通过GUI(图形用户界面)调节你的领地</span></li>
+            <li><span class="blue-text">服务器提供假人：使用指令<code>/playerdoll:doll create &lt;假人名称&gt;</code>，但是<code>&lt;假人名称&gt;</code>需要找mqx2333申请，否则会自动踢出，申请通过后，可以使用 <code>/playerdoll:doll spawn &lt;名称&gt;</code> 将假人生成在你的旁边</span></li>
+            <li><span class="blue-text">本服务器 <span class="highlight">支持</span> 玩家创建生电组织/其他各种组织，但是不得孤立/欺负/针对其他玩家</span></li>
+        </ul>
+        
+        <h2><i class="fas fa-ban" style="margin-right: 10px;"></i>惩罚区</h2>
+        <ul>
+            <li><span class="blue-text">反作弊自动封禁/踢出的，予以申诉，如有误封请找mqx2333(QQ: <code>1582187266</code> )</span></li>
+        </ul>
+        
+        <h3 class="blue-text"><i class="fas fa-info-circle"></i> 详细的惩罚</h3>
+        <table>
+            <tr>
+                <th><i class="fas fa-skull-crossbones"></i> 开挂(本服务器不允许生电模组的大多数功能，如Tweakeroo和投影等)</th>
+                <th><i class="fas fa-seedling"></i> 种子泄露</th>
+                <th><i class="fas fa-comment-slash"></i> 辱骂/侮辱他人</th>
+                <th><i class="fas fa-exclamation-triangle"></i> 宣传不正当意识形态，违反国家规定</th>
+            </tr>
+            <tr>
+                <td class="yellow-text">封禁/踢出，反作弊自动执行，生电模组予以解封(人工封禁不予解封)</td>
+                <td class="yellow-text">IP封禁+账户封禁</td>
+                <td class="yellow-text">酌情处理</td>
+                <td class="yellow-text">封禁+踢出玩家交流群</td>
+            </tr>
+        </table>
+        
+        <h3 class="blue-text"><i class="fas fa-list-ol"></i> 常见行为/等级</h3>
+        <table>
+            <tr>
+                <th>常见行为/等级</th>
+                <th class="pink-text"><i class="fas fa-times-circle"></i> A级(封禁/踢出)->绝对不允许</th>
+                <th class="blue-text"><i class="fas fa-exclamation-circle"></i> B级->允许但不建议(无法保证会不会被封禁/踢出但是会予以解封)</th>
+                <th class="yellow-text"><i class="fas fa-check-circle"></i> C级->完全没问题/允许/支持</th>
+            </tr>
+            <tr>
+                <td>Tweakeroo</td>
+                <td>凭空放置/一切原版不能直接实现的功能</td>
+                <td>自动经验修补/等等一切原版也可以做到就是稍微有点麻烦的</td>
+                <td>伽马值修改/熔岩下清晰视野</td>
+            </tr>
+            <tr>
+                <td>投影</td>
+                <td>快速放置/一切能快速放置获取优势的行为</td>
+                <td>连点器放置(不建议过快)</td>
+                <td>照着投影搭建</td>
+            </tr>
+            <tr>
+                <td>连点器/每隔`n`时间段点击一次</td>
+                <td>左键不允许</td>
+                <td>右键酌情允许(dc点击->拖动点击)</td>
+                <td>bc(蝴蝶点)，dbc(双倍蝴蝶点)</td>
+            </tr>
+            <tr>
+                <td>聊天</td>
+                <td>骂人/侮辱/违反国家规定</td>
+                <td>宣传其他服务器(我推荐在玩家交流群进行->只允许名称宣传，不允许发消息宣传)</td>
+                <td>讨论除MC之外的任何内容(这里是自由的，只要你符合我们的A级B级，你可以讨论任何内容)</td>
+            </tr>
+        </table>
+        
+        <h2><i class="fas fa-gavel" style="margin-right: 10px;"></i>声明区</h2>
+        <ul>
+            <li><span class="blue-text">本服务器 <span class="highlight">不保证</span> 玩家电脑忽然爆炸/蓝屏/数据丢失/等等 <span class="highlight">各种可能会发生的极端情况</span> ，对此本服务器团队不承担任何责任</span></li>
+            <li><span class="blue-text">本服务器开放赞助(玩家交流群群文件)，公益服这个配置压力太大了，每周需要6元的赞助服务器才会长期开下去，当然，你可以选择不赞助，这完全自愿，我也会尽力将服务器运营下去，无论您是否会赞助</span></li>
+            <li><span class="blue-text">本服务器反作弊系统 <span class="highlight">不保证不会对玩家进行误判(踢出/封禁)</span> ，如有误封请找mqx2333(QQ: <code>1582187266</code> )</span></li>
+        </ul>
+        
+        <p class="yellow-text">*注:服务器结构种子由以下程序随机生成:</p>
+        <div class="code-block">
+            <pre>import random
+
+def randlist(a,b,num):
+  randlist = []
+  for i in range(0,num):
+    c = random.randint(a,b)
+    randlist.append(c)
+    c=0
+  return randlist
+
+def listToStr(lst):
+  string = ""
+  for i in range(0,len(list(lst))):
+    string = string + str(lst[i])
+  return string
+listrand = randlist(0,10,8)
+print(listToStr(listrand))</pre>
+        </div>
+        <p class="yellow-text">本服务器开源的插件请遵循 <code>GPL-3.0 License</code> 协议</p>
+        
+        <div class="copyright">
+            --Pleasant Server团队，保留所有权利
+        </div>
+    </div>
+    
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <script>
+        // 粒子效果
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // 随机大小
+                const size = Math.random() * 5 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // 随机位置
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.bottom = `-${size}px`;
+                
+                // 随机动画持续时间
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // 随机延迟
+                const delay = Math.random() * 20;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // 返回顶部按钮
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('active');
+            } else {
+                scrollTop.classList.remove('active');
+            }
+        });
+        
+        document.getElementById('scrollTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 初始化
+        window.addEventListener('load', function() {
+            createParticles();
+        });
+    </script>
+</body>
+</html>
